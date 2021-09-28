@@ -10,17 +10,17 @@
 ### 3. Copy request to CA PKI directory
 ```cp serverName.req pki/```
 
-### 4. Mount CA PKI dir under container's ```/usr/local/pki``` path
-```docker run -it -v $(pwd)/pki:/usr/local/pki```
+### 4. Mount CA PKI dir under container's ```/usr/local/ca/pki``` path
+```docker run -it -v /usr/local/ca/pki:/usr/local/ca/pki```
 
 ### 5. Import request
-```docker run -it -v $(pwd)/pki:/usr/local/pki pmszmaglinski/easyrsa:latest easyrsa import-req ./serverName.req serverName```
+```docker run -it -v /usr/local/ca/pki:/usr/local/ca/pki pmszmaglinski/easyrsa:latest easyrsa import-req ./serverName.req serverName```
 
 ### 6.1 Sign request
-```docker run -it -v $(pwd)/pki:/usr/local/pki pmszmaglinski/easyrsa:latest easyrsa sign-req server serverName```
+```docker run -it -v /usr/local/ca/pki:/usr/local/ca/pki pmszmaglinski/easyrsa:latest easyrsa sign-req server serverName```
 
 ### 6.2 Sign request for wildcard certificate
-```docker run -it -v $(pwd)/pki:/usr/local/pki pmszmaglinski/easyrsa:latest easyrsa --subject-alt-name='DNS:home.lan,DNS:*.home.lan' sign-req server serverName```
+```docker run -it -v /usr/local/ca/pki:/usr/local/ca/pki pmszmaglinski/easyrsa:latest easyrsa --subject-alt-name='DNS:home.lan,DNS:*.home.lan' sign-req server serverName```
 
 ### 7. Copy certificate to requesting server
 

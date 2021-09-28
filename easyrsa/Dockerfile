@@ -6,4 +6,4 @@ RUN yum update -y \
     && yum clean all
 
 ENV PATH="/usr/share/easy-rsa/3:${PATH}"
-ENV EASYRSA_PKI='/usr/local/pki'
+ENV EASYRSA_PKI='/usr/local/ca/pki'
